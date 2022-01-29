@@ -45,7 +45,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new error('Invalid user data');
+    throw new Error('Invalid user data');
   }
 });
 
@@ -66,9 +66,10 @@ const loginUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
+    console.log(res.error);
     // 401 is unauthorised
     res.status(401);
-    throw new error('Invalid credentials');
+    throw new Error('Invalid credentials');
   }
 });
 
