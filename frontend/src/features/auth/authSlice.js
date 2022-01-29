@@ -10,6 +10,7 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: '',
+  successMessage: '',
 };
 
 // Register new user
@@ -26,7 +27,7 @@ export const register = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString();
-      console.log(message);
+
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -46,6 +47,7 @@ export const authSlice = createSlice({
       state.isError = false;
       state.isSuccess = false;
       state.message = '';
+      state.successMessage = null;
     },
   },
   extraReducers: (builder) => {
@@ -57,6 +59,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.user = action.payload;
+        state.successMessage = 'Account successfully created.';
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;

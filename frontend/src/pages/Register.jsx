@@ -13,9 +13,8 @@ function Register() {
     password2: '',
   });
 
-  const { user, isLoading, isSuccess, message, isError } = useSelector(
-    (state) => state.auth
-  );
+  const { user, isLoading, isSuccess, message, isError, successMessage } =
+    useSelector((state) => state.auth);
 
   const { name, email, password, password2 } = formData;
 
@@ -29,7 +28,8 @@ function Register() {
     // Redirect when logged in
     if (isSuccess && user) {
       navigate('/');
-      dispatch(reset);
+      toast.success(successMessage); // Message set in Redux
+      dispatch(reset());
     }
   }, [isError, isSuccess, user, message, navigate, dispatch]);
 
