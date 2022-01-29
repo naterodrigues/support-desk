@@ -1,8 +1,12 @@
 const express = require('express');
 const colors = require('colors');
 const dotenv = require('dotenv').config();
+const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 const PORT = process.env.PORT || 8000;
+
+// Connect to Database
+connectDB();
 
 const app = express();
 
